@@ -6,16 +6,17 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 21:33:44 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 14:54:40 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/15 15:19:11 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		check_tetri(char *str, int i)
+int		check_tetri(char *str)
 {
-	
-	return (1);
+	t_tetri	*tetri;
+
+	return (tetri);
 }
 
 int		check_file(char *str)
@@ -47,7 +48,7 @@ int		check_file(char *str)
 	return (!(i > 0 && str[i - 1] == '\n'));
 }
 
-int		open_file(char *file)
+t_tetri	*open_file(char *file)
 {
 	int		fd;
 	char	*str;
@@ -58,5 +59,5 @@ int		open_file(char *file)
 	str = ft_read(fd);
 	error((str == NULL));
 	error((check_file(str) == 0));
-	return (1);
+	return (check_tetri(str));
 }

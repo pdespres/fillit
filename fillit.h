@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:50:03 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 14:37:19 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/15 15:16:04 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@
 typedef unsigned char	t_byte;
 typedef struct			s_tetri
 {
-	char	num;
-	char	lettre;
-	char	type;
-	char	p1[2];
-	char	p2[2];
-	char	p3[2];
-	char	lmax;
-	char	hmax;
+	char				num;
+	char				lettre;
+	char				type;
+	char				p1[2];
+	char				p2[2];
+	char				p3[2];
+	char				lmax;
+	char				hmax;
+	truct s_tetri		*next;
 }						t_tetri;
 
 #endif
