@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:50:03 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:01 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/09 10:22:13 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/13 10:42:05 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "libft.h"
 
-# include <stdlib.h>
-
-# define EMPTY '.'
-# define FULL '#'
-
-typedef struct			s_list
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char				num;
-	char				p1[2];
-	char				p2[2];
-	char				p3[2];
-	char				lmax;
-	char				hmax;
-	struct s_list		*next;
-}						t_list;
+	char	*str;
 
-#endif
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	str = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (str == NULL)
+		return (NULL);
+	str[0] = '\0';
+	str = ft_strcpy(str, s1);
+	str = ft_strcat(str, s2);
+	return (str);
+}

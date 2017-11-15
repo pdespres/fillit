@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:27 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/10 14:39:23 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/13 10:37:32 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	t_list		*tetri;
-	int			cote_carre;
-	char		**map;
+	t_list	*ptr;
 
-	map = NULL;
-	if (ac != 2)
+	if (alst == NULL || *alst == NULL || del == NULL)
+		return ;
+	while ((*alst)->next)
 	{
-		ft_putstr_fd("usage: ./fillit input_file\n", 2);
-		return (0);
+		ptr = (*alst)->next;
+		ft_lstdelone(&(*alst), del);
+		(*alst) = ptr;
 	}
-	tetri = open_file(av[1]);
-	cotecarre = sizemini(tetri);
-	while (1)
-	{
-		ft_freetabmem(map);
-		map = create_map(cotecarre);
-		if (resolve(map, tetri, cotecarre))
-			break ;
-		cotecarre += 2;
-	}
-	print_map(map);
-	return (0);
+	ft_lstdelone(&(*alst), del);
+	*alst = NULL;
 }

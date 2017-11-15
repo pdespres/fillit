@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:50:03 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:01 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/09 13:58:23 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/09 14:06:18 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "libft.h"
 
-# include <stdlib.h>
-
-# define EMPTY '.'
-# define FULL '#'
-
-typedef struct			s_list
+void	ft_putendl_fd(char const *s, int fd)
 {
-	char				num;
-	char				p1[2];
-	char				p2[2];
-	char				p3[2];
-	char				lmax;
-	char				hmax;
-	struct s_list		*next;
-}						t_list;
-
-#endif
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
+}

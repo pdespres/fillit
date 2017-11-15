@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:27 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/08 10:45:38 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/08 10:49:14 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+int		ft_isprint(int c)
 {
-	t_list		*tetri;
-	int			cote_carre;
-	char		**map;
-
-	map = NULL;
-	if (ac != 2)
-	{
-		ft_putstr_fd("usage: ./fillit input_file\n", 2);
-		return (0);
-	}
-	tetri = open_file(av[1]);
-	cotecarre = sizemini(tetri);
-	while (1)
-	{
-		ft_freetabmem(map);
-		map = create_map(cotecarre);
-		if (resolve(map, tetri, cotecarre))
-			break ;
-		cotecarre += 2;
-	}
-	print_map(map);
+	if (c >= 32 && c <= 126)
+		return (1);
 	return (0);
 }

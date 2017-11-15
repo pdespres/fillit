@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:27 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/09 10:01:53 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/13 10:44:55 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+int		ft_strequ(char const *s1, char const *s2)
 {
-	t_list		*tetri;
-	int			cote_carre;
-	char		**map;
-
-	map = NULL;
-	if (ac != 2)
-	{
-		ft_putstr_fd("usage: ./fillit input_file\n", 2);
+	if (s1 == NULL || s2 == NULL)
 		return (0);
-	}
-	tetri = open_file(av[1]);
-	cotecarre = sizemini(tetri);
-	while (1)
-	{
-		ft_freetabmem(map);
-		map = create_map(cotecarre);
-		if (resolve(map, tetri, cotecarre))
-			break ;
-		cotecarre += 2;
-	}
-	print_map(map);
-	return (0);
+	return (ft_strcmp(s1, s2) != 0 ? 0 : 1);
 }

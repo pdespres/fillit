@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:27 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/07 17:16:24 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/13 10:27:05 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+int		ft_strncmp(char const *s1, char const *s2, size_t n)
 {
-	t_list		*tetri;
-	int			cote_carre;
-	char		**map;
+	size_t			i;
+	unsigned char	c1;
+	unsigned char	c2;
 
-	map = NULL;
-	if (ac != 2)
-	{
-		ft_putstr_fd("usage: ./fillit input_file\n", 2);
+	if (n == 0)
 		return (0);
-	}
-	tetri = open_file(av[1]);
-	cotecarre = sizemini(tetri);
-	while (1)
+	i = 0;
+	while (i < n)
 	{
-		ft_freetabmem(map);
-		map = create_map(cotecarre);
-		if (resolve(map, tetri, cotecarre))
+		c1 = s1[i];
+		c2 = s2[i];
+		if (c1 == '\0' || c2 == '\0' || c1 != c2)
 			break ;
-		cotecarre += 2;
+		i++;
 	}
-	print_map(map);
-	return (0);
+	return (c1 - c2);
 }

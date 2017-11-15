@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:27 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/08 11:16:34 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/10 14:28:43 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	t_list		*tetri;
-	int			cote_carre;
-	char		**map;
+	size_t	i;
+	char	*cdst;
+	char	*csrc;
 
-	map = NULL;
-	if (ac != 2)
+	if (dst == src)
+		return (dst);
+	cdst = (char*)dst;
+	csrc = (char*)src;
+	i = 0;
+	if (n == 0)
+		return (dst);
+	while (i <= n - 1)
 	{
-		ft_putstr_fd("usage: ./fillit input_file\n", 2);
-		return (0);
+		cdst[i] = csrc[i];
+		i++;
 	}
-	tetri = open_file(av[1]);
-	cotecarre = sizemini(tetri);
-	while (1)
-	{
-		ft_freetabmem(map);
-		map = create_map(cotecarre);
-		if (resolve(map, tetri, cotecarre))
-			break ;
-		cotecarre += 2;
-	}
-	print_map(map);
-	return (0);
+	return (dst);
 }

@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:50:03 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:01 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/09 10:09:54 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/09 21:14:47 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "libft.h"
 
-# include <stdlib.h>
-
-# define EMPTY '.'
-# define FULL '#'
-
-typedef struct			s_list
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char				num;
-	char				p1[2];
-	char				p2[2];
-	char				p3[2];
-	char				lmax;
-	char				hmax;
-	struct s_list		*next;
-}						t_list;
+	char	*copie;
 
-#endif
+	if (s == NULL)
+		return (NULL);
+	copie = (char*)malloc((len + 1) * sizeof(char));
+	if (copie == NULL)
+		return (NULL);
+	copie[len] = '\0';
+	return (ft_strncpy(copie, s + start, len));
+}

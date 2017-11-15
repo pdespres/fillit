@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:27 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/07 16:26:16 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/09 20:17:38 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+char	*ft_strncpy(char *dst, char const *src, size_t len)
 {
-	t_list		*tetri;
-	int			cote_carre;
-	char		**map;
+	size_t	i;
 
-	map = NULL;
-	if (ac != 2)
+	i = 0;
+	if (len == 0)
+		return (dst);
+	while (i <= (len - 1))
 	{
-		ft_putstr_fd("usage: ./fillit input_file\n", 2);
-		return (0);
+		dst[i] = src[i];
+		if (src[i] == '\0')
+		{
+			i++;
+			while (i <= len - 1)
+			{
+				dst[i] = '\0';
+				i++;
+			}
+		}
+		i++;
 	}
-	tetri = open_file(av[1]);
-	cotecarre = sizemini(tetri);
-	while (1)
-	{
-		ft_freetabmem(map);
-		map = create_map(cotecarre);
-		if (resolve(map, tetri, cotecarre))
-			break ;
-		cotecarre += 2;
-	}
-	print_map(map);
-	return (0);
+	return (dst);
 }

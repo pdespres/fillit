@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:50:03 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:01 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/10 14:38:02 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/13 10:33:00 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "libft.h"
 
-# include <stdlib.h>
-
-# define EMPTY '.'
-# define FULL '#'
-
-typedef struct			s_list
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
-	char				num;
-	char				p1[2];
-	char				p2[2];
-	char				p3[2];
-	char				lmax;
-	char				hmax;
-	struct s_list		*next;
-}						t_list;
-
-#endif
+	if (alst == NULL || *alst == NULL || del == NULL)
+		return ;
+	del((*alst)->content, (*alst)->content_size);
+	free(*alst);
+	*alst = NULL;
+}

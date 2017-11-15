@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:50:03 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:01 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/07 13:30:42 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/08 14:50:50 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "libft.h"
 
-# include <stdlib.h>
-
-# define EMPTY '.'
-# define FULL '#'
-
-typedef struct			s_list
+int		ft_isalpha(int c)
 {
-	char				num;
-	char				p1[2];
-	char				p2[2];
-	char				p3[2];
-	char				lmax;
-	char				hmax;
-	struct s_list		*next;
-}						t_list;
-
-#endif
+	return (MAX(ft_islower(c), ft_isupper(c)));
+}

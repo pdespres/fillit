@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:27 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/07 16:49:02 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/09 15:17:56 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	t_list		*tetri;
-	int			cote_carre;
-	char		**map;
+	size_t	i;
+	size_t	j;
 
-	map = NULL;
-	if (ac != 2)
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
 	{
-		ft_putstr_fd("usage: ./fillit input_file\n", 2);
-		return (0);
+		i++;
 	}
-	tetri = open_file(av[1]);
-	cotecarre = sizemini(tetri);
-	while (1)
+	while (s2[j] != '\0' && j < n)
 	{
-		ft_freetabmem(map);
-		map = create_map(cotecarre);
-		if (resolve(map, tetri, cotecarre))
-			break ;
-		cotecarre += 2;
+		s1[i + j] = s2[j];
+		j++;
 	}
-	print_map(map);
-	return (0);
+	s1[i + j] = '\0';
+	return (s1);
 }

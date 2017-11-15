@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_countwords.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:27 by pdespres         ###   ########.fr       */
+/*   Created: 2017/11/13 12:23:06 by pdespres          #+#    #+#             */
+/*   Updated: 2017/11/13 12:24:39 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+int	ft_countwords(char const *str, char sep)
 {
-	t_list		*tetri;
-	int			cote_carre;
-	char		**map;
+	int		words;
+	int		i;
+	int		bnext;
 
-	map = NULL;
-	if (ac != 2)
+	words = 0;
+	i = 0;
+	bnext = 1;
+	while (str[i])
 	{
-		ft_putstr_fd("usage: ./fillit input_file\n", 2);
-		return (0);
+		if (!(str[i] == sep))
+		{
+			if (bnext)
+			{
+				bnext = 0;
+				words++;
+			}
+		}
+		else
+			bnext = 1;
+		i++;
 	}
-	tetri = open_file(av[1]);
-	cotecarre = sizemini(tetri);
-	while (1)
-	{
-		ft_freetabmem(map);
-		map = create_map(cotecarre);
-		if (resolve(map, tetri, cotecarre))
-			break ;
-		cotecarre += 2;
-	}
-	print_map(map);
-	return (0);
+	return (words);
 }
