@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 21:33:44 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/16 11:12:22 by ncohen           ###   ########.fr       */
+/*   Updated: 2017/11/16 17:39:15 by ncohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,58 @@ int		check_tetri(char *str)
 	char	hauteur;
 	char	longueur;
 	int		save;
+	int		dont_back;
 	t_tetri *tetri;
+	int		piece_num;
 
+	piece_num = 0;
 	i = 0;
-	hauteur = 1;
-	longueur = 1;
-	while (str[i] != '#')
-		i++;
-	save = i;
+	dont_back = -1;
 	while (str[i] != '\0')
 	{
-		while (str[i] != '\n' && str[i + 1] != '\n')
+		longueur = 1;
+		hauteur = 1;
+		while (str[i] != '#')
+			i++;
+		tetri = ft_new_tetri(tetri);
+		while (hauteur + longueur != 5)
 		{
-			if (hauteur + longueur != 4)
+			if (str[i + 1] == '#' || str[i + 5] == '#' || str[i - 1] == '#')
 			{
-				if (str[i + 1] == '#' || str[i + 5] == '#' || str[i - 1] == '#')
-				{
-					if (str[i + 1] == '#' || str[i - 1] == '#')
-						longueur++;
-						if (str[i + 1] == '#')
-							tetri->pos[longueur + hauteur - 1][1] = 1;
-						if (str[i - 1] == '#')
-							tetri->pos[longueur + hauteur - 1][1] = -1;
-					else
-						hauteur++;
-						tetro->pos[longueur + hauteur - 1][0] = 1;
-				}
-				else
-					error("pas une bonne forme");
-				i += 5;
+				if ((str[i + 1] == '#' && i + 1 != dont_back) || 
+						(str[i - 1] == '#' && i - 1 != dont_back))
+					longueur++;
+					if (str[i + 1] == '#')
+						tetri->pos[longueur + hauteur - 2][0] = 1;
+						dont_back = i;
+						i += i + 1;
+					else if (str[i - 1] == '#')
+						tetri->pos[longueur + hauteur - 2][0] = -1;
+						dont_back = i;
+						i += i - 1;
+				else if (str[i + 5] == '#')
+					hauteur++;
+					tetri->pos[longueur + hauteur - 2][1] = 1;
+					i += 5;
+				else if	(str[i - 1] && i - 1 == dont_back)
+					if (str[i - 2] == '#')
+						tetri->pos[longueur + hauteur - 2][0] = -1;
 			}
+			else if (str[i + 4] == '#')
+				hauteur++;
+				tetri->pos[longueur + hauteur - 2][1] = 1;
+				i += 4;
 			else
-				ft_fill_tetri();
-				i = (22 - save)
+				error("pas une bonne forme");
 		}
+		tetri->lmax = longueur;
+		tetri->hmax = hauteur;
+		tetri->num = piece_num;
+		while(str[i - 1] != '\n' && str[i - 2] != '\n')
+			i++;
 	}
-	return (tetritest);
 }
+
 
 int		check_file(char *str)
 {
