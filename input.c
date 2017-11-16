@@ -14,8 +14,43 @@
 
 int		check_tetri(char *str)
 {
-	t_tetri	*tetri;
+	int 	i;
+	char	hauteur;
+	char	longueur;
+	t_tetri *tetri;
 
+	i = 0;
+	hauteur = 1;
+	longueur = 1;
+	if (str == '\0')
+		return (1);
+	while (str[i] != '#')
+		i++;
+	while (str != \0)
+	{
+		while (str[i] != '\n' && str[i + 1] != '\n')
+		{
+			if (hauteur + longueur != 4)
+			{
+				if (str[i + 1] == '#' || str[i + 5] == '#' || str[i - 1] == '#')
+				{
+					if (str[i + 1] == '#' || str[i - 1] == '#')
+						longueur++;
+						if (str[i + 1] == '#')
+							tetri->pos[longueur - 1][0] = 1;
+						if (str[i - 1] == '#')
+							tetri->pos[longueur - 1][0] = 1;
+					else
+						hauteur++;
+				}
+				else
+					error();
+				i += 5;
+			}
+			else
+				ft_fill_tetri()
+		}
+	}
 	return (tetri);
 }
 
