@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:50:03 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:01 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/16 09:33:12 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@
 typedef struct			s_list
 {
 	char				num;
-	char				p1[2];
-	char				p2[2];
-	char				p3[2];
+	char				p[4][2];
 	char				lmax;
 	char				hmax;
 	struct s_list		*next;
