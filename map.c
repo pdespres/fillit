@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 16:01:27 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:54 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/16 09:59:47 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ char	**create_map(int size)
 	i = 0;
 	while(i++ < size)
 	{
-		map[i] = ft_strnew(size);
+		map[i] = (char*)malloc(size + 1);
 		error(map[i] == NULL);
+		map[i][size] = '\0';
+		ft_memset(map[i], EMPTY, size);
 	}
 	return (map);
 }
