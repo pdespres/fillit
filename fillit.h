@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:50:03 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/16 09:53:17 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/16 11:08:23 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define EMPTY '.'
 # define FULL '#'
 
+// p[4][2]: p[0] est pour algo.c (pos actuelle) | p[?][0] = x | p[?][1] = y
 typedef struct			s_list
 {
 	char				num;

@@ -6,34 +6,54 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 21:18:51 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/16 10:12:05 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/16 11:10:49 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		pose_tetri(char **map, t_list *tetri, int maxsize, int piece)
+int		check_block(char **map, t_list tetri, int maxsize, int piece)
+{
+	char	x;
+	char	y;
+
+	x = tetri->p[0][0] + (piece > 0 ? tetri->p[piece][0] : 0);
+	y = tetri->p[0][1] + (piece > 0 ? tetri->p[piece][1] : 0);
+	if (map[x][y] == EMPTY)
+	{
+		if (piece == 3 || (piece < 3 && check_block(map, tetri, maxsize, piece + 1)))
+		{
+			map[x][y] = (tetri->num - 1 + 'A');
+			return (1)
+		}
+	}
+	return (0);
+}
+
+int		pose_tetri(char **map, t_list *tetri, int maxsize)
 {
 	char	x;
 	char	y;
 
 	x = 0;
 	y = 0;
-	while (x++ <= (maxsize - tetri->lmax))
+	while (y++ <= (maxsize - tetri->hmax))
 	{
-		while (y++ <= (maxsize -tetri->hmax))
+		while (x++ <= (maxsize - tetri->lmax))
 		{
 			if (map[x][y] == EMPTY)
 			{
-				if (piece == 3)
+				tetri->p[0][0] = x;
+				tetri->p[0][1] = y;
+				if (check_block(map, tetri, maxsize, 0))
 				{
 					map[x][y] = (tetri->num - 1 + 'A');
+					return (1);
 				}
-				if (pose_tetri(map, tetri, maxsize, piece + 1))
 			}
 		}
 	}
-	return (1);
+	return (0);
 }
 
 int		resolve(char **map, t_list *tetri, int maxsize)
@@ -41,7 +61,7 @@ int		resolve(char **map, t_list *tetri, int maxsize)
 	t_list	*temp;
 
 	temp = tetri;
-	if (pose_tetri(map, temp, maxsize, 0))
+	if (pose_tetri(map, temp, maxsize))
 	{
 		temp = temp->next;
 		if (temp = NULL)
