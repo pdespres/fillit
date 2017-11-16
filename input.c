@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 21:33:44 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/16 10:28:23 by ncohen           ###   ########.fr       */
+/*   Updated: 2017/11/16 11:12:22 by ncohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ int		check_tetri(char *str)
 	int 	i;
 	char	hauteur;
 	char	longueur;
+	int		save;
 	t_tetri *tetri;
 
 	i = 0;
 	hauteur = 1;
 	longueur = 1;
-	if (str == '\0')
-		return (1);
 	while (str[i] != '#')
 		i++;
-	while (str != \0)
+	save = i;
+	while (str[i] != '\0')
 	{
 		while (str[i] != '\n' && str[i + 1] != '\n')
 		{
@@ -37,18 +37,20 @@ int		check_tetri(char *str)
 					if (str[i + 1] == '#' || str[i - 1] == '#')
 						longueur++;
 						if (str[i + 1] == '#')
-							tetri->pos[longueur - 1][0] = 1;
+							tetri->pos[longueur + hauteur - 1][1] = 1;
 						if (str[i - 1] == '#')
-							tetri->pos[longueur - 1][0] = 1;
+							tetri->pos[longueur + hauteur - 1][1] = -1;
 					else
 						hauteur++;
+						tetro->pos[longueur + hauteur - 1][0] = 1;
 				}
 				else
-					error();
+					error("pas une bonne forme");
 				i += 5;
 			}
 			else
-				ft_fill_tetri()
+				ft_fill_tetri();
+				i = (22 - save)
 		}
 	}
 	return (tetritest);
