@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 21:33:44 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 15:19:11 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/16 10:28:23 by ncohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		check_tetri(char *str)
 				ft_fill_tetri()
 		}
 	}
-	return (tetri);
+	return (tetritest);
 }
 
 int		check_file(char *str)
