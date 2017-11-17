@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 14:49:59 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/17 16:17:16 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 int			main(int ac, char **av)
 {
-	char		**tetri;
-	char		*map;
+	char	**tetri;
+	t_char	*map;
 
 	map = NULL;
 	if (ac != 2)

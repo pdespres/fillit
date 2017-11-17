@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 21:33:44 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 15:04:11 by ncohen           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:35:43 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**check_tetri(char *str)
 			return (NULL);
 		i++;
 	}
-	str_places[i - 1][0] = 0;
+	str_places[i - 1] = 0;
 	i = 1;
 	refresh = 1;
 	while(str[x])
@@ -72,6 +72,7 @@ char	**check_tetri(char *str)
 		while(str[x] != '\n' && str[x + 1] != '\n')
 		{
 			write(1, "t\n", 2);
+			write(1, "\n", 2);
 			x++;
 			refresh++;
 			if (str[x] == '#')

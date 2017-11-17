@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 21:18:51 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 15:21:13 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/17 17:34:15 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,60 @@
 /* opti check larg & ht max en put_tetri								*/
 /* opti check doublon en resolve										*/
 
-static void	destroy_tetri()
+static void	destroy_tetri(char **tetri, int ind, char pos)
 {
+	char	temp;
+	char	block;
 
-}
-
-static int	check_block(char *map, char **tetri, int ind, int block)
-{
-	static char	x;
-	static char	y;
-
-
-	if (piece == 0)
+	block = 4;
+	while (block > 0)
 	{
-		x = tetri->p[0][0];
-		y = tetri->p[0][1};
-}
-x += (piece > 0 ? tetri->p[piece][0] : 0);
-y += (piece > 0 ? tetri->p[piece][1] : 0);
-if (x < 0 || x > maxsize || y < 0 || y > maxsize)
-	return (0);
-if (map[x][y] == EMPTY)
-{	
-	if (piece == 3 || (piece < 3 && check_block(map, tetri, maxsize, piece + 1)))
-	{
-		map[x][y] = (tetri->num + 'A');
-		return (1)
+		temp = pos;
+		temp = pos % SIDE + tetri[ind][1] - tetri[ind][block] % 5;
+		temp += (tetri[ind][block] / 5) * SIDE;
+		map[temp] = EMPTY;
+		block--;
 	}
 }
-return (0);
+
+static int	check_block(t_char *map, char **tetri, int ind, char pos)
+{
+	static char	block = 1;
+	char		temp;
+
+	block++;
+	temp = pos;
+
+	if (tetri[ind][1] - tetri[ind][block] % 5 > pos % SIDE - 1
+			|| tetri[ind][block] % 5 - tetri[ind][1] > SIDE - pos % SIDE
+			|| tetri[ind][block] / 5 > SIDE - pos / SIDE
+	   )
+		return (0);
+	temp = pos % SIDE + tetri[ind][1] - tetri[ind][block] % 5;
+	temp += (tetri[ind][block] / 5) * SIDE;
+	if (map[temp] == EMPTY)
+	{	
+		if (block == 3 || (block < 3 && check_block(map, tetri, ind, pos)))
+		{
+			map[temp] = (tetri->num + 'A');
+			block = 1;
+			return (1)
+		}
+	}
+	block = 1;
+	return (0);
 }
 
-static int	put_tetri(char *map, char **tetri, int ind, char *offset)
+static int	put_tetri(t_char *map, char **tetri, int ind, char *offset)
 {
 	char	i;
 
 	i = *offset;
-	while (map[i] && i < tetri[0][0] * tetri[0][0])
+	while (map[i] && i < SIDE * SIDE)
 	{
 		if (map[i] == EMPTY)
 		{
-			if (check_block(map, tetri, side_sz, 1))
+			if (check_block(map, tetri, side_sz, i))
 			{
 				map[i] = ind - 1 + 'A';
 				*offset = i;
@@ -68,12 +81,12 @@ static int	put_tetri(char *map, char **tetri, int ind, char *offset)
 	return (0);
 }
 
-int		resolve(char *map, char **tetri, int ind)
+int		resolve(t_char *map, char **tetri, int ind)
 {
 	char		offset;
 
 	offset = 0;
-	while (offset < tetri[0][0] * tetri[0][0])
+	while (offset < SIDE * SIDE)
 	{
 		if (put_tetri(map, tetri, ind, &offset))
 		{
@@ -81,7 +94,7 @@ int		resolve(char *map, char **tetri, int ind)
 				return (1);
 			if (resolve(map, tetri, ind + 1))
 				return (1);
-			destroy_tetri();
+			destroy_tetri(tetri, ind, offset);
 		}
 		offset++;	
 	}
