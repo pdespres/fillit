@@ -6,15 +6,16 @@
 #    By: pdespres <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/13 21:46:29 by pdespres          #+#    #+#              #
-#    Updated: 2017/11/17 18:23:15 by pdespres         ###   ########.fr        #
+#    Updated: 2017/11/17 19:05:06 by pdespres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit 
 REP1 = ./srcs/
 REPH = ./includes/
-SRC = ft_error.c ft_memset.c \
-	  main.c map.c utils.c algo.c
+SRC = ft_error.c ft_memset.c ft_strjoin.c ft_strcpy.c ft_strcat.c \
+	  ft_strlen.c \
+	  main.c map.c utils.c algo.c load_file.c input.c
 SRCO = 
 
 all: $(NAME)
