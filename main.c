@@ -6,23 +6,22 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 10:19:47 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/17 13:00:42 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*	Rules:																	*/
-*/	l'ensemble des tetri est un tab de chaine[4] avec indice = ordre		*/
+/*	l'ensemble des tetri est un tab de chaine[4] avec indice = ordre		*/
+/*	le tab[0] est reserve pour des infos de map								*/
 /*	un tetri est une chaine[4] avec les 4 pos des blocs max 255				*/
-*/	creation tetri: chaine[0] = 0, chaine[1-3] = +X sur carre de 4			*/
 */	map: carre de cote X sous forme de chaine de longueur X*X				*/
 
 int			main(int ac, char **av)
 {
-	t_list		*tetri;
-	int			cote_carre;
-	char		**map;
+	char		**tetri;
+	char		*map;
 
 	map = NULL;
 	if (ac != 2)
@@ -31,15 +30,15 @@ int			main(int ac, char **av)
 		return (0);
 	}
 	tetri = open_file(av[1]);
-	cotecarre = sizemini(tetri);
+	tetri[0][0] = sizemini(tetri);
 	while (1)
 	{
-		ft_freetabmem(map);
-		map = create_map(cotecarre);
-		if (resolve(map, tetri, cotecarre))
+		free(map);
+		map = create_map(tetri[0][0]);
+		if (resolve(map, tetri))
 			break ;
-		cotecarre += 2;
+		tetri[0][0]++;
 	}
-	print_map(map);
+	print_map(map, tetri[0][0]);
 	return (0);
 }
