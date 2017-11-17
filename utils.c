@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 12:31:59 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 17:37:57 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/17 18:09:36 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char			sizemini(char **tetri)
 	int		nbr;
 
 	nbr = tablen(tetri);
-	error(nbr == 0);
+	ft_error(nbr == 0);
 	if (nbr <= 1)
 		return (2);
 	else if (nbr <= 4)

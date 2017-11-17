@@ -6,19 +6,16 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 18:03:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/15 18:17:36 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/17 18:03:40 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fillit.h"
 
-void	ft_error(int i, char *mes)
+void	ft_error(int i)
 {
 	if (i != 1)
 		return ;
-	if (mes != NULL && mes[0] != '\0')
-		ft_putstr_fd(mes, 2);
-	else
-		ft_putstr_fd("error\n", 2);
+	write(2, "error\n", 6);
 	exit(42);
 }

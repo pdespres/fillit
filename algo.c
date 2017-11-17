@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 21:18:51 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 17:34:15 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/17 18:19:47 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /* opti check larg & ht max en put_tetri								*/
 /* opti check doublon en resolve										*/
 
-static void	destroy_tetri(char **tetri, int ind, char pos)
+static void	destroy_tetri(t_char *map, char **tetri, int ind, char pos)
 {
-	char	temp;
-	char	block;
+	int		temp;
+	int		block;
 
 	block = 4;
 	while (block > 0)
@@ -33,8 +33,8 @@ static void	destroy_tetri(char **tetri, int ind, char pos)
 
 static int	check_block(t_char *map, char **tetri, int ind, char pos)
 {
-	static char	block = 1;
-	char		temp;
+	static int	block = 1;
+	int			temp;
 
 	block++;
 	temp = pos;
@@ -50,9 +50,9 @@ static int	check_block(t_char *map, char **tetri, int ind, char pos)
 	{	
 		if (block == 3 || (block < 3 && check_block(map, tetri, ind, pos)))
 		{
-			map[temp] = (tetri->num + 'A');
+			map[temp] = ind -1 + 'A';
 			block = 1;
-			return (1)
+			return (1);
 		}
 	}
 	block = 1;
@@ -61,14 +61,14 @@ static int	check_block(t_char *map, char **tetri, int ind, char pos)
 
 static int	put_tetri(t_char *map, char **tetri, int ind, char *offset)
 {
-	char	i;
+	int			i;
 
 	i = *offset;
 	while (map[i] && i < SIDE * SIDE)
 	{
 		if (map[i] == EMPTY)
 		{
-			if (check_block(map, tetri, side_sz, i))
+			if (check_block(map, tetri, ind, i))
 			{
 				map[i] = ind - 1 + 'A';
 				*offset = i;
@@ -90,11 +90,11 @@ int		resolve(t_char *map, char **tetri, int ind)
 	{
 		if (put_tetri(map, tetri, ind, &offset))
 		{
-			if (tetri[ind + 1] = NULL)
+			if (tetri[ind + 1] == NULL)
 				return (1);
 			if (resolve(map, tetri, ind + 1))
 				return (1);
-			destroy_tetri(tetri, ind, offset);
+			destroy_tetri(map, tetri, ind, offset);
 		}
 		offset++;	
 	}
