@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 13:00:42 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/17 14:49:59 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			main(int ac, char **av)
 	{
 		free(map);
 		map = create_map(tetri[0][0]);
-		if (resolve(map, tetri))
+		if (resolve(map, tetri, 0))
 			break ;
 		tetri[0][0]++;
 	}

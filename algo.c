@@ -6,16 +6,25 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 21:18:51 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 12:59:57 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/17 15:21:13 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		check_block(char **map, t_list tetri, int maxsize, int piece)
+/* opti check larg & ht max en put_tetri								*/
+/* opti check doublon en resolve										*/
+
+static void	destroy_tetri()
+{
+
+}
+
+static int	check_block(char *map, char **tetri, int ind, int block)
 {
 	static char	x;
 	static char	y;
+
 
 	if (piece == 0)
 	{
@@ -37,58 +46,44 @@ if (map[x][y] == EMPTY)
 return (0);
 }
 
-int		put_tetri(char *map, char *tetri, int side_sz, char offset)
+static int	put_tetri(char *map, char **tetri, int ind, char *offset)
 {
 	char	i;
 
-	i = 0;
-	while (i < side_sz * side_sz)
+	i = *offset;
+	while (map[i] && i < tetri[0][0] * tetri[0][0])
 	{
 		if (map[i] == EMPTY)
 		{
-			if (offset > 0)
-		}
-	}
-	while (y++ <= (maxsize - tetri->hmax))
-	{
-		while (x++ <= (maxsize - tetri->lmax))
-		{
-			if (map[x][y] == EMPTY)
+			if (check_block(map, tetri, side_sz, 1))
 			{
-				if (decalage == 0)
-					tetri->p[0][0] = x;
-				tetri->p[0][1] = y;
-				if (check_block(map, tetri, maxsize, 0))
-				{
-					map[x][y] = (tetri->num + 'A');
-					return (1);
-				}
-				else
-					decalage--;
+				map[i] = ind - 1 + 'A';
+				*offset = i;
+				return (1);
 			}
 		}
+		i++;
 	}
+	*offset = i;
 	return (0);
 }
 
-int		resolve(char *map, char **tetri, int side_sz, int ind)
+int		resolve(char *map, char **tetri, int ind)
 {
 	char		offset;
 
 	offset = 0;
-	while (1)
+	while (offset < tetri[0][0] * tetri[0][0])
 	{
-		if (put_tetri(map, tetri[ind], side_sz, offset))
+		if (put_tetri(map, tetri, ind, &offset))
 		{
 			if (tetri[ind + 1] = NULL)
 				return (1);
-			while (!resolve(map, tetri, side_sz, ind + 1))
-			{
-				clear_tetri();
-			}
+			if (resolve(map, tetri, ind + 1))
+				return (1);
+			destroy_tetri();
 		}
-		else
-			offset++;	
+		offset++;	
 	}
 	return (0);
 }
