@@ -6,70 +6,62 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 21:33:44 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/16 17:39:15 by ncohen           ###   ########.fr       */
+/*   Updated: 2017/11/17 12:58:20 by ncohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		check_tetri(char *str)
+char	**check_tetri(char *str)
 {
 	int 	i;
-	char	hauteur;
-	char	longueur;
-	int		save;
-	int		dont_back;
-	t_tetri *tetri;
-	int		piece_num;
-
-	piece_num = 0;
+	int		j;
+	char	**str_places;
+	int		piece_number;
+	int		first_place;
 	i = 0;
-	dont_back = -1;
-	while (str[i] != '\0')
+	j = 1;
+	while(str[i])
+		i++;
+	piece_number = i / 21;
+	i = 0;
+	str_places = (char**)malloc(sizeof(*str_places) * (piece_number + 2));
+	while (piece_number + 2 != i)
+		str_places[i++] = (char*)malloc(sizeof(**str_places) * 5);
+	str_places[i][0] = 0;
+	i = 1;
+	while(str[x])
 	{
-		longueur = 1;
-		hauteur = 1;
-		while (str[i] != '#')
-			i++;
-		tetri = ft_new_tetri(tetri);
-		while (hauteur + longueur != 5)
+		while (str[x] != '#')
+			x++;
+			refresh++;
+		if (refresh < 5)
+			piece_number[i][j] = refresh;
+			first_place = refresh;		
+		else if(refresh > 5 && refresh < 10)
+			str_places[i][j] = refresh - 5;
+			first_place = refresh - 5;
+		else if (refresh > 10 && refresh < 15)
+			str_places[i][j] = refresh - 10;
+			first_place = refresh - 10;
+		else if (refresh > 15 && refresh < 20)
+			str_places[i][j] = refresh - 15;
+			first_place = refresh - 15;
+		j++;
+		while(str[x] != '\n' && str[x + 1] != '\n')
 		{
-			if (str[i + 1] == '#' || str[i + 5] == '#' || str[i - 1] == '#')
-			{
-				if ((str[i + 1] == '#' && i + 1 != dont_back) || 
-						(str[i - 1] == '#' && i - 1 != dont_back))
-					longueur++;
-					if (str[i + 1] == '#')
-						tetri->pos[longueur + hauteur - 2][0] = 1;
-						dont_back = i;
-						i += i + 1;
-					else if (str[i - 1] == '#')
-						tetri->pos[longueur + hauteur - 2][0] = -1;
-						dont_back = i;
-						i += i - 1;
-				else if (str[i + 5] == '#')
-					hauteur++;
-					tetri->pos[longueur + hauteur - 2][1] = 1;
-					i += 5;
-				else if	(str[i - 1] && i - 1 == dont_back)
-					if (str[i - 2] == '#')
-						tetri->pos[longueur + hauteur - 2][0] = -1;
-			}
-			else if (str[i + 4] == '#')
-				hauteur++;
-				tetri->pos[longueur + hauteur - 2][1] = 1;
-				i += 4;
-			else
-				error("pas une bonne forme");
+			x++;
+			if (str[x] == '#')
+				str_places[i][j++] = refresh - first_place;
 		}
-		tetri->lmax = longueur;
-		tetri->hmax = hauteur;
-		tetri->num = piece_num;
-		while(str[i - 1] != '\n' && str[i - 2] != '\n')
-			i++;
+		x += 2;
+		i++;
+		j = 1;
+		refresh = 0;
 	}
+	str_place[i][j - 1] = 0;
+	return (str_place);
 }
-
 
 int		check_file(char *str)
 {
