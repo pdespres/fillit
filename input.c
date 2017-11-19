@@ -27,8 +27,7 @@ char	**check_tetri(char *str)
 	j = 1;
 	while(str[i])
 		i++;
-	piece_number = i / 21;
-	ft_putnbr(piece_number);
+	piece_number = i / 20;
 	i = 0;
 	if(!(str_places = (char**)malloc(sizeof(*str_places) * (piece_number + 2))))
 		return (NULL);
@@ -40,7 +39,7 @@ char	**check_tetri(char *str)
 	}
 	str_places[i - 1] = 0;
 	i = 1;
-	refresh = 1;
+	refresh = 0;
 	while(str[x])
 	{
 		while (str[x] != '#')
@@ -51,43 +50,59 @@ char	**check_tetri(char *str)
 		if (refresh < 5)
 		{
 			str_places[i][j] = refresh;
-			first_place = refresh;
+			first_place = 0;
 		}
-		else if(refresh > 5 && refresh < 10)
+		else if(refresh >= 5 && refresh <= 8)
 		{
-			str_places[i][j] = refresh - 5;
-			first_place = refresh - 5;
+			first_place = -5;
+			str_places[i][j] = refresh - first_place;
 		}
-		else if (refresh > 10 && refresh < 15)
+		else if (refresh >= 10 && refresh <= 13)
 		{
-			str_places[i][j] = refresh - 10;
-			first_place = refresh - 10;
+			first_place = -10;
+			str_places[i][j] = refresh - first_place;
 		}
-		else if (refresh > 15 && refresh < 20)
+		else if (refresh >= 15 && refresh <= 18)
 		{
-			str_places[i][j] = refresh - 15;
-			first_place = refresh - 15;
+			first_place = -15;
+			str_places[i][j] = refresh - first_place;
+			
 		}
 		j++;
-		while(str[x] != '\n' && str[x + 1] != '\n')
+		ft_putnbr(i);
+		ft_putchar(' ');
+		ft_putnbr(j - 1);
+		ft_putchar('(');
+		ft_putnbr(refresh);
+		ft_putchar(' ');
+		ft_putnbr(first_place);
+		ft_putchar(')');
+		ft_putchar('\n');
+		while(refresh != 20)
 		{
-			write(1, "t\n", 2);
-			write(1, "\n", 2);
 			x++;
 			refresh++;
 			if (str[x] == '#')
 			{
 				str_places[i][j] = refresh - first_place;
+				ft_putnbr(i);
+				ft_putchar(' ');
+				ft_putnbr(j);
+				ft_putchar('(');
+				ft_putnbr(refresh);
+				ft_putchar(' ');
+				ft_putnbr(first_place);
+				ft_putchar(')');
+				ft_putchar('\n');
 				j++;
 			}
 		}
-		write(1, "\n", 1);
-		x += 2;
+		x++;
 		i++;
 		j = 1;
 		refresh = 0;
 	}
-	str_places[i][j - 1] = 0;
+	str_places[i] = 0;
 	return (str_places);
 }
 /*
