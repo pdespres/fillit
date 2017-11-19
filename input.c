@@ -12,11 +12,11 @@
 
 #include "fillit.h"
 
-char	**check_tetri(char *str)
+int	**check_tetri(char *str)
 {
 	int 	i;
 	int		j;
-	char	**str_places;
+	int	**str_places;
 	int		piece_number;
 	int		first_place;
 	int		refresh;
@@ -29,11 +29,11 @@ char	**check_tetri(char *str)
 		i++;
 	piece_number = i / 20;
 	i = 0;
-	if(!(str_places = (char**)malloc(sizeof(*str_places) * (piece_number + 2))))
+	if(!(str_places = (int**)malloc(sizeof(*str_places) * (piece_number + 2))))
 		return (NULL);
 	while (piece_number + 2 != i)
 	{
-		if(!(str_places[i] = (char*)malloc(sizeof(**str_places) * 5)))
+		if(!(str_places[i] = (int*)malloc(sizeof(**str_places) * 5)))
 			return (NULL);
 		i++;
 	}
@@ -42,6 +42,8 @@ char	**check_tetri(char *str)
 	refresh = 0;
 	while(str[x])
 	{
+		if (x > (((piece_number) * 21) - 20))
+			break ;
 		while (str[x] != '#')
 		{
 			x++;
@@ -69,31 +71,13 @@ char	**check_tetri(char *str)
 			
 		}
 		j++;
-		ft_putnbr(i);
-		ft_putchar(' ');
-		ft_putnbr(j - 1);
-		ft_putchar('(');
-		ft_putnbr(refresh);
-		ft_putchar(' ');
-		ft_putnbr(first_place);
-		ft_putchar(')');
-		ft_putchar('\n');
-		while(refresh != 20)
+		while(refresh != 20 && str[x])
 		{
 			x++;
 			refresh++;
 			if (str[x] == '#')
 			{
 				str_places[i][j] = refresh - first_place;
-				ft_putnbr(i);
-				ft_putchar(' ');
-				ft_putnbr(j);
-				ft_putchar('(');
-				ft_putnbr(refresh);
-				ft_putchar(' ');
-				ft_putnbr(first_place);
-				ft_putchar(')');
-				ft_putchar('\n');
 				j++;
 			}
 		}
@@ -102,7 +86,6 @@ char	**check_tetri(char *str)
 		j = 1;
 		refresh = 0;
 	}
-	str_places[i] = 0;
 	return (str_places);
 }
 /*
