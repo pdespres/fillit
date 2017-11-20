@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:32:10 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 16:03:57 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 16:06:01 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**check_tetri(char **str)
 	i = 0;
 	x = 1;
 	decalage = 0;
-	printf("la str existe tjrs?\n%s\n", *str)
+	printf("la str existe tjrs?\n%s\n", *str);
 	while(str[0][i])
 	{
 		if (i % 21 == 0)
