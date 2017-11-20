@@ -12,6 +12,51 @@
 
 #include "fillit.h"
 
+char	**ft_alloc(char *str_base, int *piece_number)
+{
+	int i;
+	char **str;
+
+	i = 0;
+	while(str_base[i])
+		i++;
+	*piece_number = i / 20;
+	i = 0;
+	if(!(str = (char**)malloc(sizeof(*str) * (*piece_number + 2))))
+		return (0);
+	while (*piece_number + 2 != i)
+		if(!(str[i++] = (char*)malloc(sizeof(**str) * 5)))
+			return (0);
+	str[i - 1] = 0;
+	return (str);
+}
+
+void		ft_refresh(int *refresh, int *first_place)
+{
+	if (*refresh < 5)
+		*first_place = 0;
+	else if(*refresh >= 5 && *refresh <= 9)
+		*first_place = 5;
+	else if (*refresh >= 10 && *refresh <= 14)
+		*first_place = 10;
+	else if (*refresh >= 15 && *refresh <= 19)
+		*first_place = 15;
+}
+
+void	ft_init(int *j, int *refresh)
+{
+	*j = 1;
+	*refresh = 0;
+}
+
+void	ft_find_hash(char *str, int *x, int *refresh)
+{
+	while (str[*x] != '#')
+	{
+		*x += 1;
+		*refresh += 1;
+	}
+}
 char	**check_tetri(char *str)
 {
 	int 	i;
@@ -22,69 +67,22 @@ char	**check_tetri(char *str)
 	int		refresh;
 	int		x;
 
-	x = 0;
-	i = 0;
-	j = 1;
-	while(str[i])
-		i++;
-	piece_number = i / 20;
-	i = 0;
-	if(!(str_places = (char**)malloc(sizeof(*str_places) * (piece_number + 2))))
-		return (NULL);
-	while (piece_number + 2 != i)
-	{
-		if(!(str_places[i] = (char*)malloc(sizeof(**str_places) * 5)))
-			return (NULL);
-		i++;
-	}
-	str_places[i - 1] = 0;
+	x = -1;
 	i = 1;
-	refresh = 0;
-	while(str[x])
+	str_places = ft_alloc(str, &piece_number);
+	while(str[++x])
 	{
+		ft_init(&j, &refresh);
 		if (x > (((piece_number) * 21) - 20))
 			break ;
-		while (str[x] != '#')
-		{
-			x++;
-			refresh++;
-		}
-		if (refresh < 5)
-		{
-			str_places[i][j] = refresh;
-			first_place = 0;
-		}
-		else if(refresh >= 5 && refresh <= 8)
-		{
-			first_place = -5;
-			str_places[i][j] = refresh - first_place;
-		}
-		else if (refresh >= 10 && refresh <= 13)
-		{
-			first_place = -10;
-			str_places[i][j] = refresh - first_place;
-		}
-		else if (refresh >= 15 && refresh <= 18)
-		{
-			first_place = -15;
-			str_places[i][j] = refresh - first_place;
-			
-		}
+		ft_find_hash(str, &x, &refresh);
+		ft_refresh(&refresh, &first_place);
+		str_places[i][j] = refresh - first_place;
 		j++;
-		while(refresh != 20 && str[x])
-		{
-			x++;
-			refresh++;
+		while(refresh++ != 20 && str[x++])
 			if (str[x] == '#')
-			{
-				str_places[i][j] = refresh - first_place;
-				j++;
-			}
-		}
-		x++;
+				str_places[i][j++] = refresh - first_place;
 		i++;
-		j = 1;
-		refresh = 0;
 	}
 	return (str_places);
 }
