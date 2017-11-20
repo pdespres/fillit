@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:32:10 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 11:18:22 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 11:26:24 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**check_tetri(char *str)
 		{
 			if (x == 1)
 				decalage = (i - (i / 21) * 21) / 5 * 5 + (i / 21 * 21);
-			str_places[i / 21][x] = i - decalage;
+			str_places[i / 21 + 1][x] = i - decalage;
 			x++;
 		}
 		i++;
