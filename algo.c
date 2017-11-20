@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 21:18:51 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 18:19:47 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 14:03:55 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	destroy_tetri(t_char *map, char **tetri, int ind, char pos)
 	while (block > 0)
 	{
 		temp = pos;
-		temp = pos % SIDE + tetri[ind][1] - tetri[ind][block] % 5;
-		temp += (tetri[ind][block] / 5) * SIDE;
+		temp = pos % SIDE - tetri[ind][1] + tetri[ind][block] % 5;
+		temp += (tetri[ind][block] / 5) * SIDE + pos / 5 * SIDE;
 		map[temp] = EMPTY;
 		block--;
 	}
@@ -39,18 +39,27 @@ static int	check_block(t_char *map, char **tetri, int ind, char pos)
 	block++;
 	temp = pos;
 
-	if (tetri[ind][1] - tetri[ind][block] % 5 > pos % SIDE - 1
-			|| tetri[ind][block] % 5 - tetri[ind][1] > SIDE - pos % SIDE
+	if (tetri[ind][1] - tetri[ind][block] % 5 > pos % SIDE 
+			|| tetri[ind][block] % 5 - tetri[ind][1] >= SIDE - pos % SIDE
 			|| tetri[ind][block] / 5 > SIDE - pos / SIDE
 	   )
+	{
+		block = 1;
 		return (0);
-	temp = pos % SIDE + tetri[ind][1] - tetri[ind][block] % 5;
-	temp += (tetri[ind][block] / 5) * SIDE;
+	}
+	temp = pos % SIDE - tetri[ind][1] + tetri[ind][block] % 5;
+//	if (ind == 4)
+//		printf("start %d block %d  calcul: 1 %d, 2 %d result %d", pos, block, tetri[ind][1], tetri[ind][block], temp);
+	temp += (tetri[ind][block] / 5) * SIDE + pos / SIDE * SIDE;
+//	if (ind == 4)
+//		printf(" -> %d\n", temp);
 	if (map[temp] == EMPTY)
-	{	
-		if (block == 3 || (block < 3 && check_block(map, tetri, ind, pos)))
+	{
+//		if (ind == 4)
+//			printf("ok empty block %d en %d\n", block, temp);
+		if (block == 4 || (block < 4 && check_block(map, tetri, ind, pos)))
 		{
-			map[temp] = ind -1 + 'A';
+			map[temp] = ind - 1 + 'A';
 			block = 1;
 			return (1);
 		}
@@ -71,7 +80,7 @@ static int	put_tetri(t_char *map, char **tetri, int ind, char *offset)
 			if (check_block(map, tetri, ind, i))
 			{
 				map[i] = ind - 1 + 'A';
-				*offset = i;
+				*offset = i + 1;
 				return (1);
 			}
 		}
@@ -90,6 +99,8 @@ int		resolve(t_char *map, char **tetri, int ind)
 	{
 		if (put_tetri(map, tetri, ind, &offset))
 		{
+//			printf("tetri n%d offset %d\n", ind, offset );
+//			print_map(map, tetri[0][0]);
 			if (tetri[ind + 1] == NULL)
 				return (1);
 			if (resolve(map, tetri, ind + 1))

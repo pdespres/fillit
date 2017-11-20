@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 16:01:27 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 18:20:33 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 15:35:00 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_char	*create_map(char size)
 	map = (t_char*)malloc(sizeof(*map) * (size * size + 1));
 	ft_error(map == NULL);
 	map[(int)size] = '\0';
-	ft_memset(map, EMPTY, size);
+	ft_memset(map, EMPTY, size * size);
 	return (map);
 }
 
@@ -35,4 +35,5 @@ void	print_map(t_char *map, char size)
 		if (i < size * size)
 			write(1, &"\n", 1);
 	}
+	write(1, &"\n", 1);
 }

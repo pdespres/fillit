@@ -6,13 +6,13 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:32:10 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 11:26:24 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 16:03:57 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char	**check_tetri(char *str)
+char	**check_tetri(char **str)
 {
 	int 	i;
 	char	**str_places;
@@ -20,8 +20,11 @@ char	**check_tetri(char *str)
 	int		x;
 
 	i = 0;
-	while(str[i])
+	while(str[0][i])
+	{
 		i++;
+	}
+	printf("max i %d\n", i);
 	x = i / 20 - (i / 20) / 20;
 	if(!(str_places = (char**)malloc(sizeof(*str_places) * (x + 2))))
 		return (NULL);
@@ -36,17 +39,19 @@ char	**check_tetri(char *str)
 	i = 0;
 	x = 1;
 	decalage = 0;
-	while(str[i])
+	printf("la str existe tjrs?\n%s\n", *str)
+	while(str[0][i])
 	{
 		if (i % 21 == 0)
 		{
 			x = 1;
 			decalage = 0;
 		}
-		if (str[i] == FULL)
+		if (str[0][i] == FULL)
 		{
 			if (x == 1)
 				decalage = (i - (i / 21) * 21) / 5 * 5 + (i / 21 * 21);
+	//		printf("[%d][%d] = %d - %d = %d\n", i/21+1,x,i,decalage,i-decalage);
 			str_places[i / 21 + 1][x] = i - decalage;
 			x++;
 		}
@@ -117,10 +122,10 @@ static int	check_file(char *str)
 	return (!(i > 0 && str[i - 1] == '\n'));
 }
 
-char	**open_file(char *file)
+char	**open_file(char *file, char *str)
 {
 	int		fd;
-	char	*str;
+//	char	*str;
 	char	**tetri;
 
 	ft_error((file == NULL));
@@ -131,6 +136,7 @@ char	**open_file(char *file)
 	ft_error(close(fd) == -1);
 	ft_error((check_file(str) == 0));
 	printf("%s\n", str);
-	tetri = check_tetri(str);
+	tetri = check_tetri(&str);
+	ft_error(tetri == NULL);
 	return(tetri);
 }

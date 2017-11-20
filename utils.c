@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 12:31:59 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 18:09:36 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:29:10 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ char			sizemini(char **tetri)
 	if (nbr <= 1)
 		return (2);
 	else if (nbr <= 4)
-		return (4);
+		return (3);
 	else if (nbr <= 9)
-		return (6);
+		return (5);
 	else if (nbr <= 16)
-		return (8);
+		return (7);
 	else if (nbr <= 25)
-		return (10);
+		return (9);
 	else
-		return (12);
+		return (11);
 }
