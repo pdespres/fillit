@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:50:03 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/19 14:26:48 by ncohen           ###   ########.fr       */
+/*   Updated: 2017/11/20 09:37:11 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+
+# include <stdio.h>
 
 # define EMPTY '.'
 # define FULL '#'
@@ -34,6 +36,6 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strcpy(char *dst, const char *src);
 char		*ft_strcat(char *s1, const char *s2);
 size_t		ft_strlen(const char *str);
-int		**check_tetri(char *str);
+char		**check_tetri(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:32:10 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 19:11:04 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 10:07:36 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,20 @@ static int	check_file(char *str)
 	nfull = 0;
 	while (1)
 	{
-		bump = (i + 1) / 21;
-		if ((i + 1 + bump) % 5 == 1)
+		if ((i + 1 - bump) % 5 == 0)
+		{
 			ft_error((str[i] != '\n' && str[i] != '\0'));
-		else if ((i + 1 + bump) % 21 == 0)
+		}
+		else if ((i + 1) % 21 == 0)
 		{
 			ft_error((str[i] != '\n' || nfull != 4));
 			nfull = 0;
 		}
 		else
+		{
 			ft_error((str[i] != EMPTY && str[i] != FULL));
+		}
+		bump = (i + 1) / 21;
 		nfull += (str[i] == FULL ? 1 : 0);
 		if (str[i] == '\0')
 			break ;
@@ -82,5 +86,6 @@ char	**open_file(char *file)
 	ft_error((str == NULL));
 	ft_error(close(fd) == -1);
 	ft_error((check_file(str) == 0));
+	printf("%s\n", str);
 	return (check_tetri(str));
 }

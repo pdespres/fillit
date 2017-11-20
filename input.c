@@ -6,17 +6,17 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 21:33:44 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 15:35:43 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:33:24 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	**check_tetri(char *str)
+char	**check_tetri(char *str)
 {
 	int 	i;
 	int		j;
-	int	**str_places;
+	char	**str_places;
 	int		piece_number;
 	int		first_place;
 	int		refresh;
@@ -29,11 +29,11 @@ int	**check_tetri(char *str)
 		i++;
 	piece_number = i / 20;
 	i = 0;
-	if(!(str_places = (int**)malloc(sizeof(*str_places) * (piece_number + 2))))
+	if(!(str_places = (char**)malloc(sizeof(*str_places) * (piece_number + 2))))
 		return (NULL);
 	while (piece_number + 2 != i)
 	{
-		if(!(str_places[i] = (int*)malloc(sizeof(**str_places) * 5)))
+		if(!(str_places[i] = (char*)malloc(sizeof(**str_places) * 5)))
 			return (NULL);
 		i++;
 	}
