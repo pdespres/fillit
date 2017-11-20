@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 18:03:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/17 18:03:40 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 17:35:37 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	ft_error(int i)
 {
 	if (i != 1)
 		return ;
-	write(2, "error\n", 6);
+	write(1, "error\n", 6);
 	exit(42);
 }

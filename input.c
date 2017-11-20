@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 21:33:44 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 16:06:42 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 17:26:46 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ char	**ft_alloc(char *str_base, int *piece_number)
 	i = 0;
 	while(str_base[i])
 		i++;
-	*piece_number = i / 20;
+	*piece_number = i / 20 - (i / 20) / 20;
 	i = 0;
 	if(!(str = (char**)malloc(sizeof(*str) * (*piece_number + 2))))
 		return (0);
-	while (*piece_number + 2 != i)
+	while (*piece_number + 1 != i)
 		if(!(str[i++] = (char*)malloc(sizeof(**str) * 5)))
 			return (0);
-	str[i - 1] = 0;
+	str[i] = 0;
 	return (str);
 }
 

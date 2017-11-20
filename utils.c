@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 12:31:59 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 13:29:10 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 19:30:08 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		tablen(char **tab)
 	i = 0;
 	while(tab[i])
 		i++;
-	return (i);
+	return (i - 1);
 }
 
 char			sizemini(char **tetri)

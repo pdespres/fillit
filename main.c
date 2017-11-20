@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:55:54 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 15:33:32 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 19:27:09 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int			main(int ac, char **av)
 {
 	char	**tetri;
 	t_char	*map;
-	int		i = 0;
 	char	*str;
 
 	map = NULL;
@@ -33,19 +32,11 @@ int			main(int ac, char **av)
 		return (0);
 	}
 	tetri = open_file(av[1], str);
-	free(str);
-	while(tetri[i])
-	{
-		printf("Tetri %d  %d %d %d %d\n", i, tetri[i][1], tetri[i][2], tetri[i][3], tetri[i][4]);
-		i++;
-	}
-
 	tetri[0][0] = sizemini(tetri);
 	while (1)
 	{
 		free(map);
 		map = create_map(tetri[0][0]);
-		printf("map de taille %d\n", tetri[0][0]);
 		if (resolve(map, tetri, 1))
 			break ;
 		tetri[0][0]++;

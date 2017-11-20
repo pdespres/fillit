@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:32:10 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 16:07:37 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 19:59:57 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	**check_tetri(char **str)
 	{
 		i++;
 	}
-	printf("max i %d\n", i);
 	x = i / 20 - (i / 20) / 20;
 	if(!(str_places = (char**)malloc(sizeof(*str_places) * (x + 2))))
 		return (NULL);
@@ -40,7 +39,6 @@ char	**check_tetri(char **str)
 	i = 0;
 	x = 1;
 	decalage = 0;
-	printf("la str existe tjrs?\n%s\n", *str);
 	while(str[0][i])
 	{
 		if (i % 21 == 0)
@@ -52,7 +50,6 @@ char	**check_tetri(char **str)
 		{
 			if (x == 1)
 				decalage = (i - (i / 21) * 21) / 5 * 5 + (i / 21 * 21);
-	//		printf("[%d][%d] = %d - %d = %d\n", i/21+1,x,i,decalage,i-decalage);
 			str_places[i / 21 + 1][x] = i - decalage;
 			x++;
 		}
@@ -83,7 +80,6 @@ static char	*read_file(int fd)
 		free(buf);
 		free(str);
 		str = tmp;
-		free(tmp);
 		if (!(buf = (char*)malloc(sizeof(*buf) * (buf_size + 1))))
 			return (NULL);
 	}
@@ -104,30 +100,30 @@ static int	check_file(char *str)
 	{
 		if ((i + 1 - bump) % 5 == 0)
 		{
+			if ((i + 1 - bump) % 20 == 0)
+			{
+				ft_error(nfull != 4);
+				nfull = 0;
+			}
 			ft_error((str[i] != '\n' && str[i] != '\0'));
 		}
-		else if ((i + 1) % 21 == 0)
-		{
-			ft_error((str[i] != '\n' || nfull != 4));
-			nfull = 0;
-		}
 		else
-		{
-			ft_error((str[i] != EMPTY && str[i] != FULL));
-		}
-		bump = (i + 1) / 21;
+			if ((i + 1) % 21 == 0)
+				ft_error((str[i] != '\n'));
+			else
+				ft_error((str[i] != EMPTY && str[i] != FULL));
+		bump = (i) / 21;
 		nfull += (str[i] == FULL ? 1 : 0);
+		i++;
 		if (str[i] == '\0')
 			break ;
-		i++;
 	}
-	return (!(i > 0 && str[i - 1] == '\n'));
+	return ((i > 0 && str[i - 1] == '\n') && (i + 1) % 21 == 0);
 }
 
 char	**open_file(char *file, char *str)
 {
 	int		fd;
-//	char	*str;
 	char	**tetri;
 
 	ft_error((file == NULL));
@@ -137,7 +133,6 @@ char	**open_file(char *file, char *str)
 	ft_error((str == NULL));
 	ft_error(close(fd) == -1);
 	ft_error((check_file(str) == 0));
-	printf("%s\n", str);
 	tetri = check_tetri(str);
 	ft_error(tetri == NULL);
 	return(tetri);
