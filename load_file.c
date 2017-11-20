@@ -6,12 +6,13 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:32:10 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 16:06:01 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 16:07:37 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+/*
 char	**check_tetri(char **str)
 {
 	int 	i;
@@ -59,6 +60,7 @@ char	**check_tetri(char **str)
 	}
 	return (str_places);
 }
+*/
 
 static char	*read_file(int fd)
 {
@@ -136,7 +138,7 @@ char	**open_file(char *file, char *str)
 	ft_error(close(fd) == -1);
 	ft_error((check_file(str) == 0));
 	printf("%s\n", str);
-	tetri = check_tetri(&str);
+	tetri = check_tetri(str);
 	ft_error(tetri == NULL);
 	return(tetri);
 }
