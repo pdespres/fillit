@@ -6,11 +6,54 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:32:10 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 10:07:36 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/20 11:18:22 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+char	**check_tetri(char *str)
+{
+	int 	i;
+	char	**str_places;
+	int		decalage;
+	int		x;
+
+	i = 0;
+	while(str[i])
+		i++;
+	x = i / 20 - (i / 20) / 20;
+	if(!(str_places = (char**)malloc(sizeof(*str_places) * (x + 2))))
+		return (NULL);
+	str_places[x + 1] = 0;
+	i = 0;
+	while (i <= x)
+	{
+		if(!(str_places[i] = (char*)malloc(sizeof(**str_places) * 5)))
+			return (NULL);
+		i++;
+	}
+	i = 0;
+	x = 1;
+	decalage = 0;
+	while(str[i])
+	{
+		if (i % 21 == 0)
+		{
+			x = 1;
+			decalage = 0;
+		}
+		if (str[i] == FULL)
+		{
+			if (x == 1)
+				decalage = (i - (i / 21) * 21) / 5 * 5 + (i / 21 * 21);
+			str_places[i / 21][x] = i - decalage;
+			x++;
+		}
+		i++;
+	}
+	return (str_places);
+}
 
 static char	*read_file(int fd)
 {
@@ -78,6 +121,7 @@ char	**open_file(char *file)
 {
 	int		fd;
 	char	*str;
+	char	**tetri;
 
 	ft_error((file == NULL));
 	fd = open(file, O_RDONLY);
@@ -87,5 +131,6 @@ char	**open_file(char *file)
 	ft_error(close(fd) == -1);
 	ft_error((check_file(str) == 0));
 	printf("%s\n", str);
-	return (check_tetri(str));
+	tetri = check_tetri(str);
+	return(tetri);
 }
