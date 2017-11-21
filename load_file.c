@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:32:10 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/21 12:56:33 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/21 13:02:24 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static int	check_file(char *str, int bump, int nfull)
 {
 	int		i;
 
-	i = 0;
-	while (str[i++] != '\0')
+	i = -1;
+	while (str[++i] != '\0')
 	{
 		if ((i + 1 - bump) % 5 == 0)
 		{
