@@ -6,11 +6,39 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 21:33:44 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 17:26:46 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:52:03 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+int			check_links(char **str, int i)
+{
+	int j;
+	int links;
+	int x;
+
+	j = 0;
+	links = 0;
+	while (j++ != 4)
+	{
+		x = 0;
+		while (++x <= 4)
+		{
+			if (str[i][j] - str[i][x] == 1)
+				links += (x == 4 ? 2 : 1);
+			if (str[i][j] - str[i][x] == -1)
+				links += (x == 4 ? 2 : 1);
+			if (str[i][j] - str[i][x] == 5)
+				links += (x == 4 ? 22 : 1);
+			if (str[i][j] - str[i][x] == -5)
+				links += (x == 4 ? 2 : 1);
+		}
+		if (links >= 6)
+			return (1);
+	}
+	return (0);
+}
 
 char		**ft_alloc(char *str_base, int *piece_number)
 {
@@ -43,24 +71,8 @@ void		ft_refresh(int *refresh, int *first_place)
 		*first_place = 15;
 }
 
-void		ft_init(int *j, int *refresh)
+char		**check_tetri(char *str, int i, int j)
 {
-	*j = 1;
-	*refresh = 0;
-}
-
-void		ft_find_hash(char *str, int *x, int *refresh)
-{
-	while (str[*x] != '#')
-	{
-		*x += 1;
-		*refresh += 1;
-	}
-}
-char		**check_tetri(char *str)
-{
-	int		i;
-	int		j;
 	char	**str_places;
 	int		piece_number;
 	int		first_place;
@@ -82,6 +94,7 @@ char		**check_tetri(char *str)
 		while (refresh++ != 20 && str[x++])
 			if (str[x] == '#')
 				str_places[i][j++] = refresh - first_place;
+		ft_error(check_links(str_places, i) == 0);
 		i++;
 	}
 	return (str_places);

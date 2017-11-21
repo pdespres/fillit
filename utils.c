@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 12:31:59 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 19:30:08 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:10:31 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,19 @@ char			sizemini(char **tetri)
 		return (9);
 	else
 		return (11);
+}
+
+void			ft_init(int *j, int *refresh)
+{
+	*j = 1;
+	*refresh = 0;
+}
+
+void			ft_find_hash(char *str, int *x, int *refresh)
+{
+	while (str[*x] != '#')
+	{
+		*x += 1;
+		*refresh += 1;
+	}
 }

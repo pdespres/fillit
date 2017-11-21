@@ -6,7 +6,7 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:50:03 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 16:05:40 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:52:13 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define EMPTY '.'
 # define FULL '#'
 # define SIDE tetri[0][0]
+# define BUMP(i) ((i) / 21)
 
 typedef unsigned char	t_char;
 
@@ -36,6 +37,8 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strcpy(char *dst, const char *src);
 char		*ft_strcat(char *s1, const char *s2);
 size_t		ft_strlen(const char *str);
-char		**check_tetri(char *str);
+char		**check_tetri(char *str, int i, int j);
+void		ft_init(int *j, int *refresh);
+void		ft_find_hash(char *str, int *x, int *refresh);
 
 #endif
