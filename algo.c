@@ -6,33 +6,16 @@
 /*   By: pdespres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 21:18:51 by pdespres          #+#    #+#             */
-/*   Updated: 2017/11/20 20:45:58 by pdespres         ###   ########.fr       */
+/*   Updated: 2017/11/21 13:12:51 by pdespres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-/*
-static int		same_tetri(char **tetri, int ind1, int ind2)
-{
-	int		i;
-
-	i = 2;
-	while (i <= 4)
-	{
-		if (tetri[ind1][i] + (tetri[ind2][1] - tetri[ind1][1]) 
-		!= tetri[ind2][i])
-			return (0);
-		i++;
-	}
-	return(1);
-}
-*/
-
 static void		destroy_tetri(t_char *map, char **tetri, int ind, char pos)
 {
-	int		temp;
-	int		block;
+	int			temp;
+	int			block;
 
 	block = 4;
 	while (block > 0)
@@ -74,7 +57,7 @@ static int		check_block(t_char *map, char **tetri, int ind, char pos)
 	return (0);
 }
 
-static int	put_tetri(t_char *map, char **tetri, int ind, char *offset)
+static int		put_tetri(t_char *map, char **tetri, int ind, char *offset)
 {
 	int			i;
 
@@ -96,7 +79,7 @@ static int	put_tetri(t_char *map, char **tetri, int ind, char *offset)
 	return (0);
 }
 
-int			resolve(t_char *map, char **tetri, int ind)
+int				resolve(t_char *map, char **tetri, int ind)
 {
 	char		offset;
 
@@ -105,8 +88,6 @@ int			resolve(t_char *map, char **tetri, int ind)
 	{
 		if (put_tetri(map, tetri, ind, &offset))
 		{
-//			print_map(map, SIDE);
-//			write(1,&"\n",1);
 			if (tetri[ind + 1] == NULL)
 				return (1);
 			if (resolve(map, tetri, ind + 1))
