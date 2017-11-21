@@ -12,11 +12,11 @@
 
 #include "fillit.h"
 
-/*	Rules:																	*/
-/*	l'ensemble des tetri est un tab de chaine[4] avec indice = ordre		*/
-/*	le tab[0] est reserve pour des infos de map								*/
-/*	un tetri est une chaine[4] avec les 4 pos des blocs max 255				*/
-/*	map: carre de cote X sous forme de chaine de longueur X*X				*/
+/*	Rules:
+	l'ensemble des tetri est un tab de chaine[4] avec indice = ordre
+	le tab[0] est reserve pour des infos de map						
+	un tetri est une chaine[4] avec les 4 pos des blocs max 255	
+	map: carre de cote X sous forme de chaine de longueur X*X*/
 
 int			main(int ac, char **av)
 {

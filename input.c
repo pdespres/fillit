@@ -12,20 +12,20 @@
 
 #include "fillit.h"
 
-char	**ft_alloc(char *str_base, int *piece_number)
+char		**ft_alloc(char *str_base, int *piece_number)
 {
-	int i;
-	char **str;
+	int		i;
+	char	**str;
 
 	i = 0;
-	while(str_base[i])
+	while (str_base[i])
 		i++;
 	*piece_number = i / 20 - (i / 20) / 20;
 	i = 0;
-	if(!(str = (char**)malloc(sizeof(*str) * (*piece_number + 2))))
+	if (!(str = (char**)malloc(sizeof(*str) * (*piece_number + 2))))
 		return (0);
 	while (*piece_number + 1 != i)
-		if(!(str[i++] = (char*)malloc(sizeof(**str) * 5)))
+		if (!(str[i++] = (char*)malloc(sizeof(**str) * 5)))
 			return (0);
 	str[i] = 0;
 	return (str);
@@ -35,7 +35,7 @@ void		ft_refresh(int *refresh, int *first_place)
 {
 	if (*refresh < 5)
 		*first_place = 0;
-	else if(*refresh >= 5 && *refresh <= 9)
+	else if (*refresh >= 5 && *refresh <= 9)
 		*first_place = 5;
 	else if (*refresh >= 10 && *refresh <= 14)
 		*first_place = 10;
@@ -43,13 +43,13 @@ void		ft_refresh(int *refresh, int *first_place)
 		*first_place = 15;
 }
 
-void	ft_init(int *j, int *refresh)
+void		ft_init(int *j, int *refresh)
 {
 	*j = 1;
 	*refresh = 0;
 }
 
-void	ft_find_hash(char *str, int *x, int *refresh)
+void		ft_find_hash(char *str, int *x, int *refresh)
 {
 	while (str[*x] != '#')
 	{
@@ -57,9 +57,9 @@ void	ft_find_hash(char *str, int *x, int *refresh)
 		*refresh += 1;
 	}
 }
-char	**check_tetri(char *str)
+char		**check_tetri(char *str)
 {
-	int 	i;
+	int		i;
 	int		j;
 	char	**str_places;
 	int		piece_number;
@@ -70,7 +70,7 @@ char	**check_tetri(char *str)
 	x = -1;
 	i = 1;
 	str_places = ft_alloc(str, &piece_number);
-	while(str[++x])
+	while (str[++x])
 	{
 		ft_init(&j, &refresh);
 		if (x > (((piece_number) * 21) - 20))
@@ -79,7 +79,7 @@ char	**check_tetri(char *str)
 		ft_refresh(&refresh, &first_place);
 		str_places[i][j] = refresh - first_place;
 		j++;
-		while(refresh++ != 20 && str[x++])
+		while (refresh++ != 20 && str[x++])
 			if (str[x] == '#')
 				str_places[i][j++] = refresh - first_place;
 		i++;

@@ -17,7 +17,7 @@ static int		tablen(char **tab)
 	int		i;
 
 	i = 0;
-	while(tab[i])
+	while (tab[i])
 		i++;
 	return (i - 1);
 }

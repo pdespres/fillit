@@ -13,7 +13,7 @@
 #include "fillit.h"
 
 /*
-char	**check_tetri(char **str)
+char		**check_tetri(char **str)
 {
 	int 	i;
 	char	**str_places;
@@ -108,10 +108,12 @@ static int	check_file(char *str)
 			ft_error((str[i] != '\n' && str[i] != '\0'));
 		}
 		else
+		{
 			if ((i + 1) % 21 == 0)
 				ft_error((str[i] != '\n'));
 			else
 				ft_error((str[i] != EMPTY && str[i] != FULL));
+		}
 		bump = (i) / 21;
 		nfull += (str[i] == FULL ? 1 : 0);
 		i++;
@@ -121,7 +123,7 @@ static int	check_file(char *str)
 	return ((i > 0 && str[i - 1] == '\n') && (i + 1) % 21 == 0);
 }
 
-char	**open_file(char *file, char *str)
+char		**open_file(char *file, char *str)
 {
 	int		fd;
 	char	**tetri;
@@ -135,5 +137,5 @@ char	**open_file(char *file, char *str)
 	ft_error((check_file(str) == 0));
 	tetri = check_tetri(str);
 	ft_error(tetri == NULL);
-	return(tetri);
+	return (tetri);
 }

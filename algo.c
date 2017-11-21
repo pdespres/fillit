@@ -13,14 +13,15 @@
 #include "fillit.h"
 
 /*
-static int	same_tetri(char **tetri, int ind1, int ind2)
+static int		same_tetri(char **tetri, int ind1, int ind2)
 {
 	int		i;
 
 	i = 2;
 	while (i <= 4)
 	{
-		if (tetri[ind1][i] + (tetri[ind2][1] - tetri[ind1][1]) != tetri[ind2][i])
+		if (tetri[ind1][i] + (tetri[ind2][1] - tetri[ind1][1]) 
+		!= tetri[ind2][i])
 			return (0);
 		i++;
 	}
@@ -28,7 +29,7 @@ static int	same_tetri(char **tetri, int ind1, int ind2)
 }
 */
 
-static void	destroy_tetri(t_char *map, char **tetri, int ind, char pos)
+static void		destroy_tetri(t_char *map, char **tetri, int ind, char pos)
 {
 	int		temp;
 	int		block;
@@ -44,18 +45,16 @@ static void	destroy_tetri(t_char *map, char **tetri, int ind, char pos)
 	}
 }
 
-static int	check_block(t_char *map, char **tetri, int ind, char pos)
+static int		check_block(t_char *map, char **tetri, int ind, char pos)
 {
 	static int	block = 1;
 	int			temp;
 
 	block++;
 	temp = pos;
-
-	if (tetri[ind][1] - tetri[ind][block] % 5 > pos % SIDE 
+	if (tetri[ind][1] - tetri[ind][block] % 5 > pos % SIDE
 			|| tetri[ind][block] % 5 - tetri[ind][1] >= SIDE - pos % SIDE
-			|| tetri[ind][block] / 5 > SIDE - pos / SIDE
-	   )
+			|| tetri[ind][block] / 5 > SIDE - pos / SIDE)
 	{
 		block = 1;
 		return (0);
@@ -97,7 +96,7 @@ static int	put_tetri(t_char *map, char **tetri, int ind, char *offset)
 	return (0);
 }
 
-int		resolve(t_char *map, char **tetri, int ind)
+int			resolve(t_char *map, char **tetri, int ind)
 {
 	char		offset;
 
@@ -114,7 +113,7 @@ int		resolve(t_char *map, char **tetri, int ind)
 				return (1);
 			destroy_tetri(map, tetri, ind, offset);
 		}
-		offset++;	
+		offset++;
 	}
 	return (0);
 }

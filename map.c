@@ -28,7 +28,7 @@ void	print_map(t_char *map, char size)
 	int		i;
 
 	i = 0;
-	while(i < size * size)
+	while (i < size * size)
 	{
 		write(1, map + i, size);
 		i += size;
