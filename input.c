@@ -85,8 +85,6 @@ char		**check_tetri(char *str, int i, int j)
 	while (str[++x])
 	{
 		ft_init(&j, &refresh);
-		if (x > (((piece_number) * 21) - 20))
-			break ;
 		ft_find_hash(str, &x, &refresh);
 		ft_refresh(&refresh, &first_place);
 		str_places[i][j] = refresh - first_place;
@@ -96,6 +94,8 @@ char		**check_tetri(char *str, int i, int j)
 				str_places[i][j++] = refresh - first_place;
 		ft_error(check_links(str_places, i) == 0);
 		i++;
+		if (x > (((piece_number) * 21) - 20))
+			break ;
 	}
 	return (str_places);
 }
